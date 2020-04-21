@@ -4,11 +4,10 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-package management.dto;
+package management.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * [OVERVIEW] XXXXX.
@@ -18,12 +17,13 @@ import lombok.Setter;
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/20      (VNEXT) TaiDM       Create new
+ * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountTransactionDto {
-    private String fullName;
-    private String bankName;
+public class RenameFile {
+    public static String renameFile() {
+        String pattern = "yyyyMMddhmmss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+        return date;
+    }
 }

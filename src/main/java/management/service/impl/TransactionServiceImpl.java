@@ -6,9 +6,14 @@
 
 package management.service.impl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +28,7 @@ import management.model.FeeEntity;
 import management.model.TransactionEntity;
 import management.service.TransactionService;
 import management.utils.ApiValidateException;
+import management.utils.RenameFile;
 
 /**
  * [OVERVIEW] XXXXX.
@@ -79,8 +85,42 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public String outputTransactionToCSV(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        List<TransactionTransferDto> listTransactions = getListTransactionByAccountId(id);
+        String fileName = RenameFile.renameFile();
+        String csvFile = "C:/Users/MinhTai/Documents/fileoutput/" + fileName + ".csv";
+        String fullname = "";
+        String bankName = "";
+        String dateTransaction = "";
+        String typeTransaction = "";
+        Long moneyTransaction = 0L;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
+                CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Date", "MoneyTransaction", "Type", "Fullname", "BankName"));) {
+            for (TransactionTransferDto dto : listTransactions) {
+                if (dto.getAccountTransactionDto() != null) {
+                    fullname = dto.getAccountTransactionDto().getFullName();
+                    bankName = dto.getAccountTransactionDto().getBankName();
+                }
+                if (dto.getTransactionDto() != null) {
+                    dateTransaction = dto.getTransactionDto().getDateTransaction().toString();
+                    moneyTransaction = dto.getTransactionDto().getMoneyTransaction();
+                    if (dto.getTransactionDto().getTypeTransaction() == 0) {
+                        typeTransaction = "Rut tien";
+                    } else if (dto.getTransactionDto().getTypeTransaction() == 1) {
+                        typeTransaction = "Nap tien";
+                    } else if (dto.getTransactionDto().getTypeTransaction() == 2) {
+                        typeTransaction = "Chuyen tien";
+                    } else {
+                        typeTransaction = "Nhan tien";
+                    }
+                }
+                csvPrinter.printRecord(dateTransaction, moneyTransaction, typeTransaction, fullname, bankName);
+            }
+            csvPrinter.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return csvFile;
     }
 
     @Override

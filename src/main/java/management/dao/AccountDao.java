@@ -57,4 +57,12 @@ public interface AccountDao {
      */
     public AccountTransactionDto getAccountTransaction(Integer id);
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param userId
+     * @param bankId
+     * @return
+     */
+    AccountEntity checkAccount(Integer userId, Integer bankId);
+
 }

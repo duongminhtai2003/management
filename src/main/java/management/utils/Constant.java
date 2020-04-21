@@ -4,11 +4,7 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-package management.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+package management.utils;
 
 /**
  * [OVERVIEW] XXXXX.
@@ -18,12 +14,11 @@ import lombok.Setter;
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/20      (VNEXT) TaiDM       Create new
+ * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
-@Getter
-@Setter
-@AllArgsConstructor
-public class AccountTransactionDto {
-    private String fullName;
-    private String bankName;
+public class Constant {
+    public static final String OK = "200";
+    public static final String NOT_IMPLEMENTED = "501";
+    public static final Long BALANCE_MIN = 50000L;
+    public static final Long MONEY_TRANSACTION_MIN = 50000L;
 }

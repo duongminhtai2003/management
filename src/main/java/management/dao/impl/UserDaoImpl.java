@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import management.dao.UserDao;
-import management.dto.UserDto;
 import management.model.UserEntity;
 
 /**
@@ -54,32 +53,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserDto findInfoUserById(Integer id) {
-//        StringBuilder sql = new StringBuilder();
-//        sql.append(" SELECT new management.model.dto.UserDto( ");
-//        sql.append(" u. ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append(" FROM ");
-//        sql.append("    UserDto u ");
-//        sql.append(" WHERE ");
-//        sql.append("    u.userId = :userId ");
-//        Query query = this.entityManager.createQuery(sql.toString());
-//        query.setParameter("userId", userId);
-//        UserDto userDto = null;
-//        try {
-//            userDto = (UserDto) query.getSingleResult();
-//        } catch (NoResultException e) {
-//            e.printStackTrace();
-//                }
-        return null;
-    }
-
-    @Override
     public UserEntity getUserById(Integer id) {
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT u");
@@ -89,6 +62,44 @@ public class UserDaoImpl implements UserDao {
         sql.append("    u.userId = :id ");
         Query query = this.entityManager.createQuery(sql.toString());
         query.setParameter("id", id);
+        UserEntity entity = null;
+        try {
+            entity = (UserEntity) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
+
+    @Override
+    public UserEntity getUserByPhone(String phone) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT u");
+        sql.append(" FROM ");
+        sql.append("    UserEntity u ");
+        sql.append(" WHERE ");
+        sql.append("    u.phone = :phone ");
+        Query query = this.entityManager.createQuery(sql.toString());
+        query.setParameter("phone", phone);
+        UserEntity entity = null;
+        try {
+            entity = (UserEntity) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
+
+    @Override
+    public UserEntity getUserByCode(Integer code) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT u");
+        sql.append(" FROM ");
+        sql.append("    UserEntity u ");
+        sql.append(" WHERE ");
+        sql.append("    u.code = :code ");
+        Query query = this.entityManager.createQuery(sql.toString());
+        query.setParameter("code", code);
         UserEntity entity = null;
         try {
             entity = (UserEntity) query.getSingleResult();

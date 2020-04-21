@@ -6,6 +6,8 @@
 
 package management.service;
 
+import java.util.Map;
+
 import management.dto.UserDto;
 import management.model.UserEntity;
 import management.utils.ApiValidateException;
@@ -49,4 +51,12 @@ public interface UserService {
      * @throws ApiValidateException 
      */
     public void updateUser(Integer id, UserEntity entity) throws ApiValidateException;
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param entity
+     * @return
+     * @throws ApiValidateException
+     */
+    public Map<String, String> login(String json) throws ApiValidateException;
 }

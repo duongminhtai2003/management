@@ -64,6 +64,28 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
+    public AccountEntity checkAccount(Integer userId, Integer bankId) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT a");
+        sql.append(" FROM ");
+        sql.append("    AccountEntity a ");
+        sql.append(" WHERE ");
+        sql.append("    a.userId = :userId ");
+        sql.append(" AND ");
+        sql.append("    a.bankId = :bankId ");
+        Query query = entityManager.createQuery(sql.toString());
+        query.setParameter("userId", userId);
+        query.setParameter("bankId", bankId);
+        AccountEntity entity = null;
+        try {
+            entity = (AccountEntity) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+        return entity;
+    }
+
+    @Override
     public void updateAccount(AccountEntity entity) {
         entityManager.merge(entity);
 
@@ -98,7 +120,7 @@ public class AccountDaoImpl implements AccountDao {
     public AccountTransactionDto getAccountTransaction(Integer id) {
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT new management.dto.AccountTransactionDto( ");
-        sql.append(" u.userName, ");
+        sql.append(" u.fullname, ");
         sql.append(" b.bankName) ");
         sql.append(" FROM ");
         sql.append("    AccountEntity a ");

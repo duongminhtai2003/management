@@ -6,7 +6,6 @@
 
 package management.dao;
 
-import management.dto.UserDto;
 import management.model.UserEntity;
 
 /**
@@ -32,13 +31,6 @@ public interface UserDao {
      * @param id
      * @return
      */
-    public UserDto findInfoUserById(Integer id);
-
-    /**
-     * @author: (VNEXT) TaiDM
-     * @param id
-     * @return
-     */
     public UserEntity getUserById(Integer id);
 
     /**
@@ -46,5 +38,19 @@ public interface UserDao {
      * @param entity
      */
     public void updateUser(UserEntity entity);
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param phone
+     * @return
+     */
+    UserEntity getUserByPhone(String phone);
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param code
+     * @return
+     */
+    UserEntity getUserByCode(Integer code);
 
 }

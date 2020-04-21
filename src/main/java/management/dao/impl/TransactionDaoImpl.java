@@ -85,35 +85,4 @@ public class TransactionDaoImpl implements TransactionDao {
         return listTransactions;
     }
 
-    //    @Override
-    //    public AccountTransaction getAccountTransaction(Integer id) {
-    //        StringBuilder sql = new StringBuilder();
-    //        sql.append(" SELECT new management.dto.account( ");
-    //        sql.append(" u.userName, ");
-    //        sql.append(" b.bankName, ");
-    //        sql.append(" t.moneyTransaction, ");
-    //        sql.append(" t.dateTransaction, ");
-    //        sql.append(" t.typeTransaction )");
-    //        
-    //        sql.append(" FROM ");
-    //        sql.append("    TransactionEntity t ");
-    //        sql.append(" INNER JOIN AccountEntity a ");
-    //        sql.append("    ON t.accountId = a.accountId ");
-    //        sql.append(" INNER JOIN BankEntity b ");
-    //        sql.append("    ON a.bankId = b.bankId ");
-    //        sql.append(" INNER JOIN UserEntity u ");
-    //        sql.append("    ON a.userId = u.userId ");
-    //        sql.append(" WHERE ");
-    //        sql.append("    t.transactionId = :id ");
-    //        Query query = entityManager.createQuery(sql.toString());
-    //        query.setParameter("id", id);
-    //        AccountTransaction accountTransaction = null;
-    //        try {
-    //            accountTransaction = (AccountTransaction) query.getSingleResult();
-    //        } catch (NoResultException e) {
-    //            e.printStackTrace();
-    //        }
-    //        return accountTransaction;
-    //    }
-
 }

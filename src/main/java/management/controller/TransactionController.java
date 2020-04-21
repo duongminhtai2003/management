@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import management.bean.ResultBean;
 import management.dto.TransactionDto;
 import management.dto.TransactionTransferDto;
 import management.service.TransactionService;
 import management.utils.ApiValidateException;
-import management.utils.ResultBean;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -79,6 +79,12 @@ public class TransactionController {
         List<TransactionTransferDto> listTransacions = new ArrayList<TransactionTransferDto>();
         listTransacions = service.getListTransactionByAccountId(id);
         return new ResponseEntity<ResultBean>(new ResultBean(listTransacions, "201", "transfers success"), HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/transaction/csv/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<ResultBean> outputCSVFile(@PathVariable Integer id) {
+         String file = service.outputTransactionToCSV(id);
+        return new ResponseEntity<ResultBean>(new ResultBean(file, "200", "output success"), HttpStatus.CREATED);
     }
 
 }

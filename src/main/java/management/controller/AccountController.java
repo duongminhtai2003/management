@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import management.bean.ResultBean;
 import management.model.AccountEntity;
 import management.service.AccountService;
 import management.utils.ApiValidateException;
-import management.utils.ResultBean;
 
 @RestController
 @RequestMapping(value = "/api")

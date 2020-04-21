@@ -1,4 +1,4 @@
-package management.utils;
+package management.bean;
 
 import java.io.Serializable;
 
