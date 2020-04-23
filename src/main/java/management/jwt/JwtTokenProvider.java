@@ -20,22 +20,22 @@ import management.bean.UserDetail;
 /**
  * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT)TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/19      (VNEXT)LinhDT       Create new
+ * 001       1.0       2020/04/19      (VNEXT)TaiDM       Create new
 */
 @Component
 public class JwtTokenProvider {
-    private final String JWT_SECRET = "Linh";
+    private final String JWT_SECRET = "MinhTai";
 
     // Thời gian có hiệu lực của chuỗi jwt
     private final long JWT_EXPIRATION = 604800000L;
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param userDetails
      * @return
      */
@@ -49,7 +49,7 @@ public class JwtTokenProvider {
     }
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param token
      * @return
      */
@@ -60,7 +60,7 @@ public class JwtTokenProvider {
     }
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param authToken
      * @return
      */

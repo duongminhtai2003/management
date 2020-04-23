@@ -6,6 +6,8 @@
 
 package management.dao;
 
+import management.model.BankEntity;
+
 /**
  * [OVERVIEW] XXXXX.
  *
@@ -17,5 +19,10 @@ package management.dao;
  * 001       1.0       2020/04/20      (VNEXT) TaiDM       Create new
 */
 public interface BankDao {
-//    public BankDto 
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @return Object BankEntity
+     */
+    public BankEntity getBankById(Integer bankId);
 }

@@ -13,24 +13,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT) TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/19      (VNEXT)LinhDT       Create new
+ * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
+
 public class DataUtils {
 
     /**
      * @author: (VNEXT)LinhDT
      * @return
      */
-    public static String getUserIdByToken() {
+    public static String getPhoneByToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
-            System.out.println(currentUserName);
             return currentUserName;
         }
         return null;

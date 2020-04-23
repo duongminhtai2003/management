@@ -19,6 +19,7 @@ import java.util.Date;
  * --------------------------------------------------------------------------
  * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
+
 public class RenameFile {
     public static String renameFile() {
         String pattern = "yyyyMMddhmmss";

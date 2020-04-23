@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // Ngăn chặn request từ một domain khác
-                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/registration").permitAll().antMatchers(HttpMethod.POST, "/api/login").permitAll() // Cho phép tất cả mọi người truy cập // vào địa chỉ này
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/register").permitAll().antMatchers(HttpMethod.POST, "/api/login").permitAll() // Cho phép tất cả mọi người truy cập // vào địa chỉ này
                 .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
         // Thêm một lớp Filter kiểm tra jwt
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

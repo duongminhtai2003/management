@@ -32,15 +32,22 @@ public interface TransactionDao {
     /**
      * @author: (VNEXT) TaiDM
      * @param id
-     * @return
+     * @return Object TransactionDto
      */
     public TransactionDto getTransactionById(Integer id);
 
     /**
      * @author: (VNEXT) TaiDM
      * @param accountId
-     * @return
+     * @return List TransactionEntity
      */
-    public List<TransactionEntity> getAllTransactionByAccountId(Integer accountId);
+    public List<TransactionEntity> getAllTransactionBank(Integer accountId);
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param accountId
+     * @return List TransactionEntity
+     */
+    public List<TransactionEntity> getAllTransactionUser(Integer userId);
 
 }

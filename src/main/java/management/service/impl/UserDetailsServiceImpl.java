@@ -23,12 +23,12 @@ import management.utils.ApiValidateException;
 /**
  * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT)TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/19      (VNEXT)LinhDT       Create new
+ * 001       1.0       2020/04/19      (VNEXT)TaiDM       Create new
 */
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-    //    private static final Logger LOGGER = LogManager.getLogger(BankController.class);
+    //private static final Logger LOGGER = LogManager.getLogger(BankController.class);
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
@@ -50,7 +50,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param id
      * @return
      * @throws ApiValidateException

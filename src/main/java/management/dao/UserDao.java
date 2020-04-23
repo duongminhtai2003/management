@@ -29,7 +29,7 @@ public interface UserDao {
     /**
      * @author: (VNEXT) TaiDM
      * @param id
-     * @return
+     * @return Object UserEntity
      */
     public UserEntity getUserById(Integer id);
 
@@ -42,15 +42,15 @@ public interface UserDao {
     /**
      * @author: (VNEXT) TaiDM
      * @param phone
-     * @return
+     * @return Object UserEntity
      */
-    UserEntity getUserByPhone(String phone);
+    public UserEntity getUserByPhone(String phone);
 
     /**
      * @author: (VNEXT) TaiDM
      * @param code
-     * @return
+     * @return Object UserEntity
      */
-    UserEntity getUserByCode(Integer code);
+    public UserEntity getUserByCode(Integer code);
 
 }

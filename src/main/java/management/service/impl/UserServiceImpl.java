@@ -9,7 +9,6 @@ package management.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.aspectj.bridge.MessageUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +27,7 @@ import management.model.UserEntity;
 import management.service.UserService;
 import management.utils.ApiValidateException;
 import management.utils.Constant;
+import management.utils.DataUtils;
 import management.utils.MessageUtils;
 import management.utils.Regex;
 
@@ -57,21 +57,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param entity
+     * @throws ApiValidateException
+     */
     @Override
-    public void createUser(UserEntity entity) throws ApiValidateException {
-        String fullname = entity.getFullname().trim();
+    public void createUser(UserEntity userEntity) throws ApiValidateException {
+        String fullname = userEntity.getFullname().trim();
         // valiadate fullname
         if (!fullname.matches(Regex.NAME_PATTERN)) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR6"));
         }
 
-        String birthday = entity.getBirthday().trim();
+        String birthday = userEntity.getBirthday().trim();
         // validate birthday
         if (!birthday.matches(Regex.DATE_PATTERN)) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR8"));
         }
 
-        String phone = entity.getPhone().trim();
+        String phone = userEntity.getPhone().trim();
         // validate phone
         if (!phone.matches(Regex.PHONE_PATTERN)) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR5"));
@@ -81,13 +86,13 @@ public class UserServiceImpl implements UserService {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR1", new Object[] { "SĐT" }));
         }
 
-        String password = entity.getPassword().trim();
+        String password = userEntity.getPassword().trim();
         // validate password
         if (!password.matches(Regex.PASSWORD_PATTERN)) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR7"));
         }
 
-        Integer code = entity.getCode();
+        Integer code = userEntity.getCode();
         // validate code
         if (!code.toString().matches(Regex.CODE_PATTERN)) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR9"));
@@ -96,50 +101,60 @@ public class UserServiceImpl implements UserService {
         if (userDao.getUserByCode(code) != null) {
             throw new ApiValidateException(Constant.NOT_IMPLEMENTED, MessageUtils.getMessage("ERROR1", new Object[] { "Số CMND" }));
         }
-        entity.setPassword(new BCryptPasswordEncoder().encode(entity.getPassword()));
-        userDao.createUser(entity);
+        userEntity.setPassword(new BCryptPasswordEncoder().encode(userEntity.getPassword()));
+        userDao.createUser(userEntity);
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @return Object UserDto
+     */
     @Override
-    public UserDto findInfoUserById(Integer id) {
+    public UserDto getUser() {
+        UserEntity userLogin = userDao.getUserByPhone(DataUtils.getPhoneByToken());
         UserDto userDto = new UserDto();
-        userDto.setUserEntity(userDao.getUserById(id));
-        userDto.setListAccounts(accountDao.getListAccountByUserId(id));
+        userDto.setUserEntity(userLogin);
+        userDto.setListAccounts(accountDao.getListAccountByUserId(userLogin.getUserId()));
         return userDto;
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param userEntity
+     * @throws ApiValidateException
+     */
     @Override
-    public UserEntity getUserById(Integer id) {
-        UserEntity entity = userDao.getUserById(id);
-        return entity;
-    }
-
-    @Override
-    public void updateUser(Integer id, UserEntity entity) throws ApiValidateException {
-        UserEntity entityOld = getUserById(id);
-        if (entity == null) {
+    public void updateUser(UserEntity userEntity) throws ApiValidateException {
+        UserEntity userLogin = userDao.getUserByPhone(DataUtils.getPhoneByToken());
+        if (userEntity == null) {
             throw new ApiValidateException("404", "Please enter all field");
         } else {
-            if (entity.getFullname() == null) {
-                entity.setFullname(entityOld.getFullname());
+            if (userEntity.getFullname() == null) {
+                userEntity.setFullname(userLogin.getFullname());
             }
-            if (entity.getBirthday() == null) {
-                entity.setBirthday(entityOld.getBirthday());
+            if (userEntity.getBirthday() == null) {
+                userEntity.setBirthday(userLogin.getBirthday());
             }
-            if (entity.getCode() == null) {
-                entity.setCode(entityOld.getCode());
+            if (userEntity.getCode() == null) {
+                userEntity.setCode(userLogin.getCode());
             }
-            if (entity.getPhone() == null) {
-                entity.setPhone(entityOld.getPhone());
+            if (userEntity.getPhone() == null) {
+                userEntity.setPhone(userLogin.getPhone());
             }
-            if (entity.getPassword() == null) {
-                entity.setPassword(entityOld.getPassword());
+            if (userEntity.getPassword() == null) {
+                userEntity.setPassword(userLogin.getPassword());
             }
-            entity.setUserId(id);
+            userEntity.setUserId(userLogin.getUserId());
         }
-        userDao.updateUser(entity);
+        userDao.updateUser(userEntity);
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param json
+     * @return Map phone password
+     * @throws ApiValidateException
+     */
     @Override
     public Map<String, String> login(String json) throws ApiValidateException {
         JSONObject jsonObject = new JSONObject(json);

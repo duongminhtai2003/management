@@ -23,25 +23,25 @@ public interface AccountService {
 
     /**
      * @author: (VNEXT) TaiDM
-     * @param json
-     * @return
+     * @param accountEntity
+     * @return Object AccountEntity
+     * @throws ApiValidateException
      */
-    public AccountEntity getAccountById(Integer id);
+    public AccountEntity getAccount(AccountEntity accountEntity) throws ApiValidateException;
 
     /**
      * @author: (VNEXT) TaiDM
-     * @param json
-     * @throws ApiValidateException 
+     * @param entity
+     * @throws ApiValidateException
      */
     public void createAccount(AccountEntity entity) throws ApiValidateException;
 
     /**
      * @author: (VNEXT) TaiDM
-     * @param id
-     * @return
+     * @param accountEntity
+     * @return Long balance
+     * @throws ApiValidateException
      */
-    public Long checkBalance(Integer id);
-
-    
+    public Long checkBalance(AccountEntity accountEntity) throws ApiValidateException;
 
 }

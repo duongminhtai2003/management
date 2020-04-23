@@ -16,13 +16,14 @@ import management.model.UserEntity;
 /**
  * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT)TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/19      (VNEXT)LinhDT       Create new
+ * 001       1.0       2020/04/19      (VNEXT)TaiDM       Create new
 */
+
 public class UserDetail implements UserDetails {
     /**
      * 

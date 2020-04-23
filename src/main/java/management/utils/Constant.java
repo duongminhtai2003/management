@@ -16,9 +16,11 @@ package management.utils;
  * --------------------------------------------------------------------------
  * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
+
 public class Constant {
     public static final String OK = "200";
     public static final String NOT_IMPLEMENTED = "501";
+    public static final String INTERNAL_SERVER_ERROR = "500";
     public static final Long BALANCE_MIN = 50000L;
     public static final Long MONEY_TRANSACTION_MIN = 50000L;
 }

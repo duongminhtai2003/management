@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,17 +37,33 @@ import management.model.AccountEntity;
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
+    private static final Logger LOGGER = LogManager.getLogger(AccountDaoImpl.class);
+
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param entity
+     */
     @Override
     public void createAccount(AccountEntity entity) {
+        LOGGER.info("------createAccount START--------------");
+
         entityManager.persist(entity);
 
+        LOGGER.info("------createAccount END--------------");
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param id
+     * @return Object AccountEntity
+     */
     @Override
     public AccountEntity getAccountById(Integer id) {
+        LOGGER.info("------getAccountById START--------------");
+
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT a");
         sql.append(" FROM ");
@@ -60,11 +78,21 @@ public class AccountDaoImpl implements AccountDao {
         } catch (NoResultException e) {
             e.printStackTrace();
         }
+
+        LOGGER.info("------getAccountById END--------------");
         return entity;
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param userId
+     * @param bankId
+     * @return Object AccountEntity
+     */
     @Override
-    public AccountEntity checkAccount(Integer userId, Integer bankId) {
+    public AccountEntity getAccount(Integer userId, Integer bankId) {
+        LOGGER.info("------getAccount START--------------");
+
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT a");
         sql.append(" FROM ");
@@ -82,18 +110,34 @@ public class AccountDaoImpl implements AccountDao {
         } catch (NoResultException e) {
             e.printStackTrace();
         }
+
+        LOGGER.info("------getAccount END--------------");
         return entity;
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param entity
+     */
     @Override
     public void updateAccount(AccountEntity entity) {
+        LOGGER.info("------updateAccount START--------------");
+
         entityManager.merge(entity);
 
+        LOGGER.info("------updateAccount END--------------");
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param id
+     * @return List listAccount
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<AccountDto> getListAccountByUserId(Integer id) {
+        LOGGER.info("------getListAccountByUserId START--------------");
+
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT new management.dto.AccountDto(");
         sql.append("    b.bankName, ");
@@ -113,11 +157,20 @@ public class AccountDaoImpl implements AccountDao {
         } catch (NoResultException e) {
             e.printStackTrace();
         }
+
+        LOGGER.info("------getListAccountByUserId END--------------");
         return listEntity;
     }
 
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param id
+     * @return Object AccountTransactionDto
+     */
     @Override
     public AccountTransactionDto getAccountTransaction(Integer id) {
+        LOGGER.info("------getAccountTransaction START--------------");
+
         StringBuilder sql = new StringBuilder();
         sql.append(" SELECT new management.dto.AccountTransactionDto( ");
         sql.append(" u.fullname, ");
@@ -138,6 +191,8 @@ public class AccountDaoImpl implements AccountDao {
         } catch (NoResultException e) {
             e.printStackTrace();
         }
+
+        LOGGER.info("------getAccountTransaction END--------------");
         return accountTransactionDto;
     }
 

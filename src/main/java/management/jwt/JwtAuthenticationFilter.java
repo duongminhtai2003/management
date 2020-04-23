@@ -28,12 +28,12 @@ import management.service.impl.UserDetailsServiceImpl;
 /**
  * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT)TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/19      (VNEXT)LinhDT       Create new
+ * 001       1.0       2020/04/19      (VNEXT)TaiDM       Create new
 */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userService;
 
+    @SuppressWarnings("serial")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -75,7 +76,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param request
      * @return
      */
@@ -89,7 +90,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * @author: (VNEXT)LinhDT
+     * @author: (VNEXT)TaiDM
      * @param request
      * @param response
      * @param failed

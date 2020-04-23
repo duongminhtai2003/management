@@ -11,15 +11,16 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * [OVERVIEW] Get messages from file properties.
+ * [OVERVIEW] XXXXX.
  *
- * @author: (VNEXT)LinhDT
+ * @author: (VNEXT) TaiDM
  * @version: 1.0
  * @History
  * [NUMBER]  [VER]     [DATE]          [USER]             [CONTENT]
  * --------------------------------------------------------------------------
- * 001       1.0       2020/04/15      (VNEXT)LinhDT      Create new
+ * 001       1.0       2020/04/21      (VNEXT) TaiDM       Create new
 */
+
 public class MessageUtils {
 
     /**

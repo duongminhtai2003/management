@@ -22,54 +22,50 @@ import management.utils.ApiValidateException;
  * --------------------------------------------------------------------------
  * 001       1.0       2020/04/20      (VNEXT) TaiDM       Create new
 */
+
 public interface TransactionService {
 
     /**
      * @author: (VNEXT) TaiDM
+     * @return List TransactionTransferDto
+     */
+    public List<TransactionTransferDto> getTransactionUser();
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @param bankId
+     * @return List TransactionTransferDto
+     */
+    public List<TransactionTransferDto> getListTransactionBank(Integer bankId);
+
+    /**
+     * @author: (VNEXT) TaiDM
+     * @return String file
+     */
+    public String outputTransactionToCSV();
+
+    /**
+     * @author: (VNEXT) TaiDM
      * @param json
-     * @return
+     * @return Object TransactionDto
+     * @throws ApiValidateException
      */
-    public List<TransactionTransferDto> getTransactionByDate(String json);
-
-    /**
-     * get account's list-transaction
-     * @author: (VNEXT) TaiDM
-     * @param accountId
-     * @return
-     */
-    public List<TransactionTransferDto> getListTransactionByAccountId(Integer accountId);
+    public TransactionDto withdrawal(String json) throws ApiValidateException;
 
     /**
      * @author: (VNEXT) TaiDM
-     * @param id
-     * @return
-     */
-    public String outputTransactionToCSV(Integer accountId);
-
-    /**
-     * @author: (VNEXT) TaiDM
-     * @param Id
      * @param json
-     * @return
-     * @throws ApiValidateException 
+     * @return Object TransactionDto
+     * @throws ApiValidateException
      */
-    public TransactionDto withdrawal(Integer accountId, String json) throws ApiValidateException;
+    public TransactionDto payin(String json) throws ApiValidateException;
 
     /**
      * @author: (VNEXT) TaiDM
-     * @param Id
      * @param json
-     * @return
+     * @return Object TransactionTransferDto
+     * @throws ApiValidateException
      */
-    public TransactionDto payin(Integer accountId, String json);
-
-    /**
-     * @author: (VNEXT) TaiDM
-     * @param Id
-     * @param json
-     * @return
-     * @throws ApiValidateException 
-     */
-    public TransactionTransferDto transfers(Integer accountId, String json) throws ApiValidateException;
+    public TransactionTransferDto transfers(String json) throws ApiValidateException;
 
 }

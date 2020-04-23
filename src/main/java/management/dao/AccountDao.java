@@ -33,7 +33,7 @@ public interface AccountDao {
     /**
      * @author: (VNEXT) TaiDM
      * @param id
-     * @return
+     * @return Object AccountEntity
      */
     public AccountEntity getAccountById(Integer id);
 
@@ -46,14 +46,14 @@ public interface AccountDao {
     /**
      * @author: (VNEXT) TaiDM
      * @param id
-     * @return
+     * @return List listAccount
      */
     public List<AccountDto> getListAccountByUserId(Integer id);
 
     /**
      * @author: (VNEXT) TaiDM
      * @param id
-     * @return
+     * @return Object AccountTransactionDto
      */
     public AccountTransactionDto getAccountTransaction(Integer id);
 
@@ -61,8 +61,8 @@ public interface AccountDao {
      * @author: (VNEXT) TaiDM
      * @param userId
      * @param bankId
-     * @return
+     * @return Object AccountEntity
      */
-    AccountEntity checkAccount(Integer userId, Integer bankId);
+    public AccountEntity getAccount(Integer userId, Integer bankId);
 
 }
